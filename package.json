@@ -1,0 +1,29 @@
+{
+  "name": "todo_app",
+  "version": "1.0.0",
+  "description": "Simple todo app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/nodemon/bin/nodemon.js app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrissharp80/todo_app.git"
+  },
+  "author": "Chris Sharp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrissharp80/todo_app/issues"
+  },
+  "homepage": "https://github.com/chrissharp80/todo_app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
+}
