@@ -9,12 +9,14 @@ const port = 8080;
 const app = express();
 
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const url = 'mongodb://localhost:27017/todoapp';
 
 // Body Parser Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
 
 // View Setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,8 +45,33 @@ app.get('/', (req, res, next) => {
 		res.render('index', {
 			todos: todos
 		});
-		// res.render('index', {
-		// 	todos: todos
-		// });
+	});
+});
+
+app.post('/todo/add', (req, res, next) => {
+	// Create todo
+	const todo = {
+		text: req.body.text,
+		body: req.body.body
+	};
+
+	// Insert todo
+	Todos.insert(todo, (err, result) => {
+		if (err) {
+			return console.log(err);
+		}
+		console.log('Todo Added...');
+		res.redirect('/');
+	});
+});
+
+app.delete('/todo/delete/:id', (req, res, next) => {
+	const query = {_id: ObjectID(req.params.id)};
+	Todos.deleteOne(query, (err, response) => {
+		if (err) {
+			return console.log(err);
+		}
+		console.log('Todo Removed');
+		res.send(200);
 	});
 });
