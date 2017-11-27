@@ -16,7 +16,10 @@ const url = 'mongodb://localhost:27017/todoapp';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Static Assets
 app.use('/scripts', express.static(path.join(__dirname, '/node_modules/jquery/dist/')));
+app.use('/styles', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css/')));
 
 // View Setup
 app.set('views', path.join(__dirname, 'views'));
